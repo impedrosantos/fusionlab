@@ -1,0 +1,170 @@
+// Portuguese (Portugal) translations.
+// To add another language, create a sibling file with the same shape and
+// register it in ./index.tsx.
+
+export const pt = {
+  nav: {
+    home: 'Início',
+    gallery: 'Galeria',
+    contact: 'Contacto',
+  },
+
+  footer: {
+    tagline: 'Impressão 3D de precisão, camada a camada.',
+    studio: 'Estúdio',
+    legal: 'Legal',
+    privacy: 'Política de Privacidade',
+    cookies: 'Cookies',
+    copyright: '© {year} FusionLab — todos os direitos reservados.',
+    builtWith: '// feito com filamento e código',
+  },
+
+  home: {
+    kicker: '> a inicializar FusionLab...',
+    titleA: 'Loading...',
+    titleAccent1: 'código',
+    titleB: 'em',
+    titleAccent2: 'objetos',
+    sub: 'Um estúdio de impressão 3D obcecado por camadas perfeitas e geometrias impossíveis. Este é o nosso registo de produção — uma galeria de tudo o que imprimimos.',
+    viewGallery: 'Ver a galeria',
+    follow: 'Seguir @fusionlab0',
+    stat1Value: '0,05mm',
+    stat1Label: 'altura mínima de camada',
+    stat2Value: 'FDM + Resina',
+    stat2Label: 'tecnologias de impressão',
+    stat3Value: '24/7',
+    stat3Label: 'máquinas em funcionamento',
+    aboutKicker: '// sobre_nos',
+    aboutTitle: 'Construído camada a camada',
+    aboutP1:
+      'A FusionLab é um pequeno estúdio onde a engenharia se encontra com o artesanato. Modelamos, fatiamos e imprimimos — e partilhamos aqui os resultados. Sem loja, sem ruído, apenas o trabalho que sai das nossas máquinas.',
+    aboutP2: 'Quer algo impresso? Fale connosco e vamos falar de geometria.',
+    aboutCta: 'Iniciar uma conversa',
+    terminal: `$ fusionlab --estado
+> fatiador ...... pronto
+> filamento ..... carregado
+> base .......... 60°C
+> bico .......... 210°C
+> fila .......... a imprimir
+✓ todos os sistemas operacionais`,
+  },
+
+  gallery: {
+    kicker: '// registo_de_impressoes',
+    title: 'Impressões Recentes',
+    sub: 'Tudo aqui saiu de uma das nossas máquinas. Toque numa impressão para ver os detalhes.',
+    empty: 'Ainda não há impressões publicadas — volte em breve.',
+    close: 'Fechar',
+  },
+
+  privacy: {
+    kicker: '// legal',
+    title: 'Política de Privacidade',
+    updated: 'Última atualização: {year}',
+    intro:
+      'A FusionLab («nós») respeita a sua privacidade. Esta página explica o que recolhemos quando visita este site e como o utilizamos. Trata-se de um modelo para um site de portefólio estático e deve ser revisto por um profissional antes de ser usado em produção.',
+    collectTitle: 'O que recolhemos',
+    collectText:
+      'Este é um site de demonstração estático. Não exigimos a criação de conta para navegar na galeria. Se nos contactar através do formulário, recebemos o nome, o email e a mensagem que decidir enviar.',
+    useTitle: 'Como o utilizamos',
+    useText:
+      'Utilizamos as informações que nos envia exclusivamente para responder ao seu pedido. Não vendemos nem partilhamos os seus dados pessoais com terceiros para fins de marketing.',
+    retentionTitle: 'Conservação dos dados',
+    retentionText:
+      'As mensagens são conservadas apenas durante o tempo necessário para tratar o seu pedido e depois eliminadas.',
+    rightsTitle: 'Os seus direitos',
+    rightsText:
+      'Pode solicitar o acesso, a correção ou a eliminação de quaisquer dados pessoais que tenha partilhado connosco. Contacte-nos através dos dados na página de contacto.',
+    contactTitle: 'Contacto',
+    contactTextA: 'Questões sobre esta política? Contacte-nos em',
+    contactTextB: 'ou através de',
+  },
+
+  cookies: {
+    kicker: '// legal',
+    title: 'Política de Cookies',
+    updated: 'Última atualização: {year}',
+    intro:
+      'Esta página explica como a FusionLab utiliza cookies e tecnologias de armazenamento local semelhantes. Trata-se de um modelo que deve ser revisto antes de ser usado em produção.',
+    whatTitle: 'O que são cookies?',
+    whatText:
+      'Os cookies são pequenos ficheiros guardados no seu dispositivo. Tecnologias semelhantes, como o localStorage, permitem que um site se lembre de informações entre visitas.',
+    useTitle: 'O que utilizamos',
+    essentialLabel: 'Armazenamento essencial.',
+    essentialText:
+      'O backoffice utiliza o armazenamento de sessão do seu navegador para manter um administrador autenticado. É apagado quando fecha o separador.',
+    contentLabel: 'Armazenamento de conteúdo.',
+    contentText:
+      'As publicações da galeria nesta demonstração são guardadas no localStorage do seu navegador para que o site funcione sem servidor.',
+    trackingLabel: 'Sem rastreio.',
+    trackingText: 'Não utilizamos cookies de publicidade nem de análise de terceiros.',
+    manageTitle: 'Gerir cookies',
+    manageText:
+      'Pode limpar os cookies e o armazenamento local a qualquer momento através das definições do seu navegador. Ao fazê-lo, terminará a sessão no backoffice.',
+  },
+
+  contact: {
+    kicker: '// diz_ola',
+    title: 'Contacto',
+    intro:
+      'Tem um modelo para imprimir, uma questão, ou apenas quer falar sobre filamento? Envie uma mensagem e entraremos em contacto.',
+    successTitle: '✓ Mensagem na fila.',
+    successText:
+      'Obrigado {name} — responderemos para {email} em breve. (Formulário de demonstração: este site é estático, por isso nada foi realmente enviado.)',
+    successThere: 'a todos',
+    successInbox: 'a sua caixa de entrada',
+    sendAnother: 'Enviar outra',
+    nameLabel: 'Nome',
+    namePlaceholder: 'Ada Lovelace',
+    emailLabel: 'Email',
+    emailPlaceholder: 'voce@exemplo.com',
+    messageLabel: 'Mensagem',
+    messagePlaceholder: 'Diga-nos o que gostaria de imprimir...',
+    send: 'Enviar mensagem',
+    altText: 'ou encontre-nos em',
+  },
+
+  notFound: {
+    kicker: '// erro 404',
+    title: 'impressao_nao_encontrada',
+    text: 'A página que procura escorregou da base de impressão.',
+    back: 'Voltar ao início',
+  },
+
+  login: {
+    title: 'backoffice',
+    subtitle: 'autentique-se para continuar',
+    userLabel: 'utilizador',
+    passwordLabel: 'palavra-passe',
+    error: 'Acesso negado — verifique as suas credenciais.',
+    submit: '> entrar',
+    hint: 'demo: admin / fusionlab',
+    back: '← voltar ao site',
+  },
+
+  dashboard: {
+    title: 'painel',
+    signOut: 'terminar sessão',
+    newPost: '// nova_publicacao',
+    editPost: '// editar_publicacao',
+    titleLabel: 'Título',
+    titlePlaceholder: 'Vaso Voronoi',
+    imageLabel: 'URL da imagem',
+    imagePlaceholder: 'https://…/impressao.jpg',
+    materialLabel: 'Material / definições',
+    materialPlaceholder: 'PLA · 0,12mm',
+    descriptionLabel: 'Descrição',
+    descriptionPlaceholder: 'Algumas palavras sobre esta impressão…',
+    preview: 'pré-visualização',
+    publish: 'Publicar',
+    saveChanges: 'Guardar alterações',
+    cancel: 'Cancelar',
+    postsTitle: '// publicacoes',
+    empty: 'Ainda não há publicações. Crie uma para preencher a galeria.',
+    edit: 'editar',
+    delete: 'eliminar',
+    confirmDelete: 'Eliminar «{title}»? Esta ação não pode ser anulada.',
+  },
+}
+
+export type Translations = typeof pt
