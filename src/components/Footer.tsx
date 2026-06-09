@@ -8,8 +8,11 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <span className="brand-name">
-            Fusion<span className="accent">Lab</span>
+          <span className="brand">
+            <img className="brand-logo" src="/logo.png" alt="" aria-hidden="true" />
+            <span className="brand-name">
+              Fusion<span className="accent">Lab</span>
+            </span>
           </span>
           <p className="footer-tagline">{t("footer.tagline")}</p>
           <a

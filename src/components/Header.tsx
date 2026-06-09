@@ -12,9 +12,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link to="/" className="brand" onClick={() => setOpen(false)}>
-          <span className="brand-mark" aria-hidden="true">
-            ◢◣
-          </span>
+          <img className="brand-logo" src="/logo.png" alt="" aria-hidden="true" />
           <span className="brand-name">
             Fusion<span className="accent">Lab</span>
           </span>
