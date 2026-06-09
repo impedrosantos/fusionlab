@@ -25,7 +25,7 @@ export const pt = {
     titleAccent1: 'código',
     titleB: 'em',
     titleAccent2: 'objetos',
-    sub: 'Estúdio de impressão 3D. Esta é a galeria do que imprimimos.',
+    sub: 'Estúdio de impressão 3D',
     viewGallery: 'Ver a galeria',
     follow: 'fusionlab0',
     stat1Value: '0,05mm',
@@ -51,8 +51,7 @@ export const pt = {
 
   gallery: {
     kicker: '// registo_de_impressoes',
-    title: 'Impressões Recentes',
-    sub: 'Toque numa impressão para ver os detalhes.',
+    title: 'Galeria',
     empty: 'Ainda não há impressões publicadas — volte em breve.',
     close: 'Fechar',
   },
