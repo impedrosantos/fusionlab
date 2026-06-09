@@ -20,20 +20,44 @@ UI text is fully internationalised; current locale is **Portuguese (pt-PT)**.
 
 ```bash
 npm install
+cp .env.example .env.local   # then fill in your Firebase web config
 npm run dev      # http://localhost:5173
 npm run build    # production build to dist/
 npm run preview  # preview the build
 ```
 
-## Backoffice
+## Firebase setup
 
-- URL: **`/bckfc3d`**
-- Demo credentials: **`admin` / `fusionlab`**
+This app uses **Firebase Authentication** (backoffice login) and **Cloud
+Firestore** (gallery posts). One-time setup:
 
-> ⚠️ Auth and post storage are **client-side only** (sessionStorage +
-> localStorage) so the static site works without a backend. Before going to
-> production, replace `src/lib/auth.ts` and `src/lib/posts.ts` with real API
-> calls and move credentials server-side.
+1. Create a project at [console.firebase.google.com](https://console.firebase.google.com).
+2. **Authentication** → Get started → enable the **Email/Password** provider.
+3. **Firestore Database** → Create database (production mode).
+4. **Project settings → General → Your apps** → add a **Web app**, then copy the
+   `firebaseConfig` values into `.env.local` (see `.env.example`).
+5. Install the CLI and log in: `npm i -g firebase-tools && firebase login`.
+6. Point the project at yours: set `default` in `.firebaserc` to your project ID
+   (or run `firebase use --add`).
+
+### Creating backoffice users
+
+There is no public sign-up. Add users in **Authentication → Users → Add user**
+(email + password). Any user you create can sign in to the backoffice; delete the
+user there to revoke access. The login screen lives at **`/bckfc3d`**.
+
+## Deployment
+
+```bash
+npm run deploy           # build + deploy hosting AND Firestore rules
+npm run deploy:hosting   # build + deploy hosting only
+npm run deploy:rules     # deploy Firestore security rules only
+```
+
+`firebase.json` serves the Vite build from `dist/` and rewrites all routes to
+`index.html` for client-side routing. `firestore.rules` makes posts **publicly
+readable** but **writable only by authenticated users** — deploy it before going
+live (`npm run deploy:rules`).
 
 ## Internationalisation (i18n)
 
@@ -50,13 +74,7 @@ src/
   pages/        Home, legal pages, contact, 404
   pages/admin/  Login, Dashboard (CRUD)
   i18n/         index.tsx (provider + useT), pt.ts (strings)
-  lib/          auth.ts, posts.ts (storage-backed stores)
+  lib/          firebase.ts (init), auth.tsx (Firebase Auth), posts.ts (Firestore)
 ```
-
-## Deployment notes
-
-This is a single-page app using client-side routing. The included
-`public/_redirects` handles SPA fallback on Netlify; for other hosts, route all
-paths to `index.html`.
 
 Social: [@fusionlab0](https://instagram.com/fusionlab0)

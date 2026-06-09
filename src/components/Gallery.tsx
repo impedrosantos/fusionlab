@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getPosts, onPostsChanged, type Post } from '../lib/posts'
+import { subscribePosts, type Post } from '../lib/posts'
 import { useT } from '../i18n'
 
 export default function Gallery() {
@@ -7,11 +7,7 @@ export default function Gallery() {
   const [posts, setPosts] = useState<Post[]>([])
   const [active, setActive] = useState<Post | null>(null)
 
-  useEffect(() => {
-    const refresh = () => setPosts(getPosts())
-    refresh()
-    return onPostsChanged(refresh)
-  }, [])
+  useEffect(() => subscribePosts(setPosts), [])
 
   return (
     <section id="gallery" className="section">

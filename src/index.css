@@ -1,19 +1,21 @@
 /* ============================================================
-   FusionLab — dark, dev/matrix-flavored theme
+   FusionLab — dark theme with soft pastel accents
    ============================================================ */
 
 :root {
-  --bg: #06080a;
-  --bg-elev: #0c1014;
-  --bg-elev-2: #11171c;
-  --border: #1c2630;
-  --border-soft: #161d24;
-  --text: #d7e2dd;
-  --text-dim: #7d8c87;
-  --accent: #22e584;
-  --accent-soft: #1f7d52;
-  --accent-glow: rgba(34, 229, 132, 0.25);
-  --danger: #ff5d5d;
+  --bg: #0e0c15;
+  --bg-elev: #16131f;
+  --bg-elev-2: #1d1928;
+  --border: #2a2438;
+  --border-soft: #211c2e;
+  --text: #e8e4f0;
+  --text-dim: #9a93ad;
+  --accent: #c4b5fd;
+  --accent-soft: #6e5fa6;
+  --accent-glow: rgba(196, 181, 253, 0.25);
+  --accent-2: #f7a8c4;
+  --accent-3: #a7f3d0;
+  --danger: #fca5a5;
   --radius: 12px;
   --maxw: 1140px;
   --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, 'Cascadia Code',
@@ -37,10 +39,11 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* subtle scanline + grid backdrop */
+  /* soft pastel light blooms */
   background-image:
-    radial-gradient(circle at 20% 0%, rgba(34, 229, 132, 0.06), transparent 45%),
-    radial-gradient(circle at 90% 10%, rgba(34, 229, 132, 0.04), transparent 40%);
+    radial-gradient(circle at 15% 0%, rgba(196, 181, 253, 0.08), transparent 45%),
+    radial-gradient(circle at 90% 8%, rgba(247, 168, 196, 0.06), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(167, 243, 208, 0.05), transparent 52%);
   background-attachment: fixed;
 }
 
@@ -55,7 +58,7 @@ a {
   transition: color 0.15s ease;
 }
 a:hover {
-  color: #6df3ad;
+  color: #d8ccff;
 }
 
 h1,
@@ -112,13 +115,13 @@ h3 {
 }
 .btn-primary {
   background: var(--accent);
-  color: #04130b;
+  color: #1f1830;
   font-weight: 600;
   box-shadow: 0 0 0 0 var(--accent-glow);
 }
 .btn-primary:hover {
-  background: #44f29a;
-  color: #04130b;
+  background: #d4c4ff;
+  color: #1f1830;
   box-shadow: 0 0 24px var(--accent-glow);
   transform: translateY(-1px);
 }
@@ -131,11 +134,11 @@ h3 {
   color: var(--accent);
 }
 .btn-danger {
-  border-color: rgba(255, 93, 93, 0.4);
+  border-color: rgba(252, 165, 165, 0.4);
   color: var(--danger);
 }
 .btn-danger:hover {
-  background: rgba(255, 93, 93, 0.12);
+  background: rgba(252, 165, 165, 0.12);
 }
 .btn-block {
   width: 100%;
@@ -150,7 +153,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(6, 8, 10, 0.72);
+  background: rgba(14, 12, 21, 0.72);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-soft);
 }
@@ -175,7 +178,7 @@ h3 {
   letter-spacing: -2px;
 }
 .brand-cursor {
-  color: var(--accent);
+  color: var(--accent-2);
   animation: blink 1.1s steps(2) infinite;
 }
 @keyframes blink {
@@ -244,7 +247,6 @@ h3 {
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 760px;
 }
 .hero-title {
   font-size: clamp(2.4rem, 6vw, 4.2rem);
@@ -342,7 +344,7 @@ h3 {
   bottom: 10px;
   left: 10px;
   font-size: 0.72rem;
-  background: rgba(6, 8, 10, 0.78);
+  background: rgba(14, 12, 21, 0.78);
   border: 1px solid var(--border);
   color: var(--accent);
   padding: 0.25em 0.6em;
@@ -367,7 +369,7 @@ h3 {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: rgba(3, 5, 6, 0.85);
+  background: rgba(8, 6, 14, 0.85);
   backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
@@ -409,7 +411,7 @@ h3 {
   top: 10px;
   right: 12px;
   z-index: 2;
-  background: rgba(6, 8, 10, 0.7);
+  background: rgba(14, 12, 21, 0.7);
   border: 1px solid var(--border);
   color: var(--text);
   width: 36px;
@@ -427,7 +429,7 @@ h3 {
 /* ---------- about ---------- */
 .about {
   border-top: 1px solid var(--border-soft);
-  background: linear-gradient(180deg, transparent, rgba(34, 229, 132, 0.02));
+  background: linear-gradient(180deg, transparent, rgba(196, 181, 253, 0.04));
 }
 .about-grid {
   display: grid;
@@ -451,7 +453,7 @@ h3 {
   color: var(--accent);
   white-space: pre;
   overflow-x: auto;
-  box-shadow: inset 0 0 60px rgba(34, 229, 132, 0.04);
+  box-shadow: inset 0 0 60px rgba(196, 181, 253, 0.05);
 }
 
 /* ---------- footer ---------- */
@@ -585,6 +587,79 @@ textarea:focus {
 textarea {
   resize: vertical;
 }
+
+/* ---------- image dropzone ---------- */
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 120px;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--bg-elev-2);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dropzone:hover {
+  border-color: var(--accent-soft);
+}
+.dropzone:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.dropzone.dragover {
+  border-color: var(--accent);
+  background: rgba(196, 181, 253, 0.07);
+}
+.dropzone.is-uploading {
+  cursor: default;
+}
+.dropzone-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+.dropzone-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.dropzone-hint {
+  font-size: 0.78rem;
+}
+.dropzone-progress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+.progress-bar {
+  height: 6px;
+  width: 100%;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar > div {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+.admin-preview button {
+  align-self: flex-start;
+}
+
 .form-success {
   background: var(--bg-elev);
   border: 1px solid var(--accent-soft);
@@ -617,12 +692,12 @@ textarea {
   z-index: 2;
   width: 100%;
   max-width: 400px;
-  background: rgba(12, 16, 20, 0.92);
+  background: rgba(22, 19, 31, 0.92);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   backdrop-filter: blur(10px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(34, 229, 132, 0.05);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(196, 181, 253, 0.08);
 }
 .login-head {
   text-align: center;
@@ -646,8 +721,8 @@ textarea {
   font-size: 0.85rem;
   margin: 0;
   padding: 0.6em 0.8em;
-  background: rgba(255, 93, 93, 0.08);
-  border: 1px solid rgba(255, 93, 93, 0.3);
+  background: rgba(252, 165, 165, 0.08);
+  border: 1px solid rgba(252, 165, 165, 0.3);
   border-radius: 7px;
 }
 .login-hint {
@@ -672,7 +747,7 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(6, 8, 10, 0.85);
+  background: rgba(14, 12, 21, 0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -836,7 +911,7 @@ textarea {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: rgba(8, 11, 14, 0.98);
+    background: rgba(16, 13, 24, 0.98);
     border-bottom: 1px solid var(--border);
     padding: 0.5rem 24px 1.25rem;
     transform: translateY(-12px);

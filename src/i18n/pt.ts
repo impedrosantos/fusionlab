@@ -25,7 +25,7 @@ export const pt = {
     titleAccent1: 'código',
     titleB: 'em',
     titleAccent2: 'objetos',
-    sub: 'Um estúdio de impressão 3D obcecado por camadas perfeitas e geometrias impossíveis. Este é o nosso registo de produção — uma galeria de tudo o que imprimimos.',
+    sub: 'Estúdio de impressão 3D. Esta é a galeria do que imprimimos.',
     viewGallery: 'Ver a galeria',
     follow: 'Seguir @fusionlab0',
     stat1Value: '0,05mm',
@@ -37,8 +37,8 @@ export const pt = {
     aboutKicker: '// sobre_nos',
     aboutTitle: 'Construído camada a camada',
     aboutP1:
-      'A FusionLab é um pequeno estúdio onde a engenharia se encontra com o artesanato. Modelamos, fatiamos e imprimimos — e partilhamos aqui os resultados. Sem loja, sem ruído, apenas o trabalho que sai das nossas máquinas.',
-    aboutP2: 'Quer algo impresso? Fale connosco e vamos falar de geometria.',
+      'Um pequeno estúdio onde a engenharia encontra o artesanato. Modelamos, fatiamos e imprimimos — e partilhamos aqui os resultados.',
+    aboutP2: 'Quer algo impresso? Fale connosco.',
     aboutCta: 'Iniciar uma conversa',
     terminal: `$ fusionlab --estado
 > fatiador ...... pronto
@@ -52,7 +52,7 @@ export const pt = {
   gallery: {
     kicker: '// registo_de_impressoes',
     title: 'Impressões Recentes',
-    sub: 'Tudo aqui saiu de uma das nossas máquinas. Toque numa impressão para ver os detalhes.',
+    sub: 'Toque numa impressão para ver os detalhes.',
     empty: 'Ainda não há impressões publicadas — volte em breve.',
     close: 'Fechar',
   },
@@ -92,10 +92,10 @@ export const pt = {
     useTitle: 'O que utilizamos',
     essentialLabel: 'Armazenamento essencial.',
     essentialText:
-      'O backoffice utiliza o armazenamento de sessão do seu navegador para manter um administrador autenticado. É apagado quando fecha o separador.',
+      'O backoffice utiliza o Firebase Authentication, que guarda um token de sessão no armazenamento do seu navegador para manter um administrador autenticado.',
     contentLabel: 'Armazenamento de conteúdo.',
     contentText:
-      'As publicações da galeria nesta demonstração são guardadas no localStorage do seu navegador para que o site funcione sem servidor.',
+      'As publicações da galeria são guardadas no Cloud Firestore e apresentadas a todos os visitantes.',
     trackingLabel: 'Sem rastreio.',
     trackingText: 'Não utilizamos cookies de publicidade nem de análise de terceiros.',
     manageTitle: 'Gerir cookies',
@@ -106,8 +106,7 @@ export const pt = {
   contact: {
     kicker: '// diz_ola',
     title: 'Contacto',
-    intro:
-      'Tem um modelo para imprimir, uma questão, ou apenas quer falar sobre filamento? Envie uma mensagem e entraremos em contacto.',
+    intro: 'Tem um modelo para imprimir ou uma questão? Envie uma mensagem.',
     successTitle: '✓ Mensagem na fila.',
     successText:
       'Obrigado {name} — responderemos para {email} em breve. (Formulário de demonstração: este site é estático, por isso nada foi realmente enviado.)',
@@ -134,11 +133,12 @@ export const pt = {
   login: {
     title: 'backoffice',
     subtitle: 'autentique-se para continuar',
-    userLabel: 'utilizador',
+    userLabel: 'email',
     passwordLabel: 'palavra-passe',
     error: 'Acesso negado — verifique as suas credenciais.',
     submit: '> entrar',
-    hint: 'demo: admin / fusionlab',
+    submitting: '> a autenticar…',
+    hint: 'as contas são geridas na consola Firebase',
     back: '← voltar ao site',
   },
 
@@ -149,8 +149,16 @@ export const pt = {
     editPost: '// editar_publicacao',
     titleLabel: 'Título',
     titlePlaceholder: 'Vaso Voronoi',
-    imageLabel: 'URL da imagem',
+    imageLabel: 'Imagem',
     imagePlaceholder: 'https://…/impressao.jpg',
+    imageDrop: 'Arraste uma imagem para aqui',
+    imageHint: 'ou clique para escolher do dispositivo',
+    imageReplace: 'Clique ou arraste para substituir a imagem',
+    imageRemove: 'remover imagem',
+    uploading: 'A carregar…',
+    imageRequired: 'Adicione uma imagem antes de publicar.',
+    imageTypeError: 'O ficheiro tem de ser uma imagem.',
+    imageUploadError: 'Falha ao carregar a imagem. Tente novamente.',
     materialLabel: 'Material / definições',
     materialPlaceholder: 'PLA · 0,12mm',
     descriptionLabel: 'Descrição',

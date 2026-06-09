@@ -1,26 +1,33 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { login, isAuthenticated } from '../../lib/auth'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { login, useAuth } from '../../lib/auth'
 import { useT } from '../../i18n'
 
 export default function Login() {
   const t = useT()
   const navigate = useNavigate()
-  const [username, setUsername] = useState('')
+  const { user, loading } = useAuth()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
 
   // Already signed in? Go straight to the dashboard.
-  if (isAuthenticated()) {
-    navigate('/bckfc3d/dashboard', { replace: true })
+  if (!loading && user) {
+    return <Navigate to="/bckfc3d/dashboard" replace />
   }
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (login(username, password)) {
+    setError('')
+    setBusy(true)
+    try {
+      await login(email, password)
       navigate('/bckfc3d/dashboard', { replace: true })
-    } else {
+    } catch {
       setError(t('login.error'))
+    } finally {
+      setBusy(false)
     }
   }
 
@@ -41,11 +48,11 @@ export default function Login() {
           <label>
             <span className="mono">{t('login.userLabel')}</span>
             <input
-              type="text"
+              type="email"
               autoComplete="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="admin"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@fusionlab.pt"
               autoFocus
             />
           </label>
@@ -62,8 +69,8 @@ export default function Login() {
 
           {error && <p className="login-error mono">{error}</p>}
 
-          <button type="submit" className="btn btn-primary btn-block">
-            {t('login.submit')}
+          <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
+            {busy ? t('login.submitting') : t('login.submit')}
           </button>
         </form>
 

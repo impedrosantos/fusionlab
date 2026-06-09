@@ -1,14 +1,21 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type DragEvent,
+  type FormEvent,
+} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  getPosts,
+  subscribePosts,
   createPost,
   updatePost,
   deletePost,
-  onPostsChanged,
   type Post,
 } from '../../lib/posts'
-import { logout, currentUser } from '../../lib/auth'
+import { uploadImage } from '../../lib/cloudinary'
+import { logout, useAuth } from '../../lib/auth'
 import { useT } from '../../i18n'
 
 type Draft = {
@@ -23,25 +30,67 @@ const EMPTY: Draft = { title: '', imageUrl: '', material: '', description: '' }
 export default function Dashboard() {
   const t = useT()
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [posts, setPosts] = useState<Post[]>([])
   const [draft, setDraft] = useState<Draft>(EMPTY)
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [uploading, setUploading] = useState(false)
+  const [uploadPct, setUploadPct] = useState(0)
+  const [dragOver, setDragOver] = useState(false)
+  const [uploadError, setUploadError] = useState('')
 
-  useEffect(() => {
-    const refresh = () => setPosts(getPosts())
-    refresh()
-    return onPostsChanged(refresh)
-  }, [])
+  useEffect(() => subscribePosts(setPosts), [])
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    if (editingId) {
-      updatePost(editingId, draft)
-    } else {
-      createPost(draft)
+  const handleFile = async (file?: File | null) => {
+    if (!file) return
+    if (!file.type.startsWith('image/')) {
+      setUploadError(t('dashboard.imageTypeError'))
+      return
     }
-    setDraft(EMPTY)
-    setEditingId(null)
+    setUploadError('')
+    setUploading(true)
+    setUploadPct(0)
+    try {
+      const url = await uploadImage(file, setUploadPct)
+      setDraft((d) => ({ ...d, imageUrl: url }))
+    } catch {
+      setUploadError(t('dashboard.imageUploadError'))
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  const onDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    setDragOver(false)
+    handleFile(e.dataTransfer.files?.[0])
+  }
+
+  const onPick = (e: ChangeEvent<HTMLInputElement>) => {
+    handleFile(e.target.files?.[0])
+    e.target.value = '' // allow re-picking the same file
+  }
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!draft.imageUrl) {
+      setUploadError(t('dashboard.imageRequired'))
+      return
+    }
+    setSaving(true)
+    try {
+      if (editingId) {
+        await updatePost(editingId, draft)
+      } else {
+        await createPost(draft)
+      }
+      setDraft(EMPTY)
+      setEditingId(null)
+    } finally {
+      setSaving(false)
+    }
   }
 
   const startEdit = (p: Post) => {
@@ -58,17 +107,18 @@ export default function Dashboard() {
   const cancelEdit = () => {
     setEditingId(null)
     setDraft(EMPTY)
+    setUploadError('')
   }
 
-  const remove = (p: Post) => {
+  const remove = async (p: Post) => {
     if (confirm(t('dashboard.confirmDelete', { title: p.title }))) {
-      deletePost(p.id)
+      await deletePost(p.id)
       if (editingId === p.id) cancelEdit()
     }
   }
 
-  const signOut = () => {
-    logout()
+  const signOut = async () => {
+    await logout()
     navigate('/bckfc3d', { replace: true })
   }
 
@@ -84,7 +134,7 @@ export default function Dashboard() {
           </span>
           <div className="admin-user mono">
             <span className="dim">
-              {currentUser()}@fusionlab <span className="accent">●</span>
+              {user?.email} <span className="accent">●</span>
             </span>
             <button className="btn btn-ghost btn-sm" onClick={signOut}>
               {t('dashboard.signOut')}
@@ -111,16 +161,60 @@ export default function Dashboard() {
                   placeholder={t('dashboard.titlePlaceholder')}
                 />
               </label>
-              <label>
+              <div className="admin-field">
                 <span>{t('dashboard.imageLabel')}</span>
+                <div
+                  className={`dropzone${dragOver ? ' dragover' : ''}${
+                    uploading ? ' is-uploading' : ''
+                  }`}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => !uploading && fileInputRef.current?.click()}
+                  onKeyDown={(e) => {
+                    if ((e.key === 'Enter' || e.key === ' ') && !uploading) {
+                      e.preventDefault()
+                      fileInputRef.current?.click()
+                    }
+                  }}
+                  onDragOver={(e) => {
+                    e.preventDefault()
+                    setDragOver(true)
+                  }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={onDrop}
+                >
+                  {uploading ? (
+                    <div className="dropzone-progress">
+                      <span className="mono">
+                        {t('dashboard.uploading')} {uploadPct}%
+                      </span>
+                      <div className="progress-bar">
+                        <div style={{ width: `${uploadPct}%` }} />
+                      </div>
+                    </div>
+                  ) : draft.imageUrl ? (
+                    <span className="mono dim">{t('dashboard.imageReplace')}</span>
+                  ) : (
+                    <div className="dropzone-empty">
+                      <span className="dropzone-icon mono accent" aria-hidden="true">
+                        ⤓
+                      </span>
+                      <span className="mono">{t('dashboard.imageDrop')}</span>
+                      <span className="mono dim dropzone-hint">
+                        {t('dashboard.imageHint')}
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <input
-                  type="url"
-                  required
-                  value={draft.imageUrl}
-                  onChange={set('imageUrl')}
-                  placeholder={t('dashboard.imagePlaceholder')}
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={onPick}
                 />
-              </label>
+                {uploadError && <p className="login-error">{uploadError}</p>}
+              </div>
               <label>
                 <span>{t('dashboard.materialLabel')}</span>
                 <input
@@ -140,15 +234,26 @@ export default function Dashboard() {
                 />
               </label>
 
-              {draft.imageUrl && (
+              {draft.imageUrl && !uploading && (
                 <div className="admin-preview">
                   <span className="mono dim">{t('dashboard.preview')}</span>
                   <img src={draft.imageUrl} alt={t('dashboard.preview')} />
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-sm"
+                    onClick={() => setDraft((d) => ({ ...d, imageUrl: '' }))}
+                  >
+                    {t('dashboard.imageRemove')}
+                  </button>
                 </div>
               )}
 
               <div className="admin-form-actions">
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={saving || uploading}
+                >
                   {editingId ? t('dashboard.saveChanges') : t('dashboard.publish')}
                 </button>
                 {editingId && (
