@@ -14,6 +14,12 @@ import {
   deletePost,
   type Post,
 } from '../../lib/posts'
+import {
+  subscribeMessages,
+  setMessageRead,
+  deleteMessage,
+  type Message,
+} from '../../lib/messages'
 import { uploadImage } from '../../lib/cloudinary'
 import { logout, useAuth } from '../../lib/auth'
 import { RichTextEditor } from '../../components/RichText'
@@ -28,11 +34,18 @@ type Draft = {
 
 const EMPTY: Draft = { title: '', imageUrl: '', material: '', description: '' }
 
+const dateFmt = new Intl.DateTimeFormat('pt-PT', {
+  dateStyle: 'medium',
+  timeStyle: 'short',
+})
+
 export default function Dashboard() {
   const t = useT()
   const navigate = useNavigate()
   const { user } = useAuth()
+  const [tab, setTab] = useState<'posts' | 'messages'>('posts')
   const [posts, setPosts] = useState<Post[]>([])
+  const [messages, setMessages] = useState<Message[]>([])
   const [draft, setDraft] = useState<Draft>(EMPTY)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
@@ -43,6 +56,15 @@ export default function Dashboard() {
   const [uploadError, setUploadError] = useState('')
 
   useEffect(() => subscribePosts(setPosts), [])
+  useEffect(() => subscribeMessages(setMessages), [])
+
+  const unreadCount = messages.filter((m) => !m.read).length
+
+  const removeMessage = async (m: Message) => {
+    if (confirm(t('dashboard.confirmDeleteMessage', { name: m.name }))) {
+      await deleteMessage(m.id)
+    }
+  }
 
   const handleFile = async (file?: File | null) => {
     if (!file) return
@@ -145,6 +167,23 @@ export default function Dashboard() {
       </header>
 
       <main className="container admin-main">
+        <nav className="admin-tabs mono">
+          <button
+            className={`admin-tab${tab === 'posts' ? ' active' : ''}`}
+            onClick={() => setTab('posts')}
+          >
+            {t('dashboard.tabPosts')}
+          </button>
+          <button
+            className={`admin-tab${tab === 'messages' ? ' active' : ''}`}
+            onClick={() => setTab('messages')}
+          >
+            {t('dashboard.tabMessages')}
+            {unreadCount > 0 && <span className="tab-badge">{unreadCount}</span>}
+          </button>
+        </nav>
+
+        {tab === 'posts' ? (
         <div className="admin-grid">
           {/* Editor */}
           <section className="admin-panel">
@@ -295,6 +334,51 @@ export default function Dashboard() {
             )}
           </section>
         </div>
+        ) : (
+          <section className="admin-panel">
+            <h2 className="panel-title mono">
+              {t('dashboard.messagesTitle')}{' '}
+              <span className="dim">[{messages.length}]</span>
+            </h2>
+            {messages.length === 0 ? (
+              <p className="empty mono">{t('dashboard.messagesEmpty')}</p>
+            ) : (
+              <ul className="admin-list messages-list">
+                {messages.map((m) => (
+                  <li key={m.id} className={`message-item${m.read ? '' : ' unread'}`}>
+                    <div className="message-head">
+                      <div className="message-from">
+                        {!m.read && <span className="unread-dot" aria-hidden="true" />}
+                        <strong>{m.name}</strong>
+                        <a href={`mailto:${m.email}`} className="mono dim">
+                          {m.email}
+                        </a>
+                      </div>
+                      <time className="mono dim message-date">
+                        {dateFmt.format(m.createdAt)}
+                      </time>
+                    </div>
+                    <p className="message-body">{m.message}</p>
+                    <div className="admin-list-actions">
+                      <button
+                        className="btn btn-ghost btn-sm"
+                        onClick={() => setMessageRead(m.id, !m.read)}
+                      >
+                        {m.read ? t('dashboard.markUnread') : t('dashboard.markRead')}
+                      </button>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => removeMessage(m)}
+                      >
+                        {t('dashboard.delete')}
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
       </main>
     </div>
   )

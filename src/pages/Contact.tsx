@@ -1,15 +1,26 @@
 import { useState, type FormEvent } from 'react'
 import { useT } from '../i18n'
+import { createMessage } from '../lib/messages'
 
 export default function Contact() {
   const t = useT()
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    // Static demo: no backend yet. Wire this to an email service or API later.
-    setSent(true)
+    setSending(true)
+    setError('')
+    try {
+      await createMessage(form)
+      setSent(true)
+    } catch {
+      setError(t('contact.error'))
+    } finally {
+      setSending(false)
+    }
   }
 
   const update = (key: keyof typeof form) => (e: { target: { value: string } }) =>
@@ -31,7 +42,13 @@ export default function Contact() {
                 email: form.email || t('contact.successInbox'),
               })}
             </p>
-            <button className="btn btn-ghost" onClick={() => setSent(false)}>
+            <button
+              className="btn btn-ghost"
+              onClick={() => {
+                setForm({ name: '', email: '', message: '' })
+                setSent(false)
+              }}
+            >
               {t('contact.sendAnother')}
             </button>
           </div>
@@ -67,8 +84,9 @@ export default function Contact() {
                 placeholder={t('contact.messagePlaceholder')}
               />
             </label>
-            <button type="submit" className="btn btn-primary">
-              {t('contact.send')}
+            {error && <p className="login-error">{error}</p>}
+            <button type="submit" className="btn btn-primary" disabled={sending}>
+              {sending ? t('contact.sending') : t('contact.send')}
             </button>
           </form>
         )}

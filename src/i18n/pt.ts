@@ -4,8 +4,6 @@
 
 export const pt = {
   nav: {
-    home: 'Início',
-    gallery: 'Galeria',
     contact: 'Contacto',
   },
 
@@ -39,7 +37,7 @@ export const pt = {
     aboutP1:
       'Um pequeno estúdio onde a engenharia encontra o artesanato. Modelamos, fatiamos e imprimimos — e partilhamos aqui os resultados.',
     aboutP2: 'Quer algo impresso? Fale connosco.',
-    aboutCta: 'Iniciar uma conversa',
+    aboutCta: 'Entrar em contacto',
     terminal: `$ fusionlab --estado
 > fatiador ...... pronto
 > filamento ..... carregado
@@ -106,19 +104,21 @@ export const pt = {
     kicker: '// diz_ola',
     title: 'Contacto',
     intro: 'Tem um modelo para imprimir ou uma questão? Envie uma mensagem.',
-    successTitle: '✓ Mensagem na fila.',
+    successTitle: '✓ Mensagem enviada.',
     successText:
-      'Obrigado {name} — responderemos para {email} em breve. (Formulário de demonstração: este site é estático, por isso nada foi realmente enviado.)',
+      'Obrigado {name} — recebemos a sua mensagem e responderemos para {email} em breve.',
     successThere: 'a todos',
     successInbox: 'a sua caixa de entrada',
     sendAnother: 'Enviar outra',
     nameLabel: 'Nome',
-    namePlaceholder: 'Ada Lovelace',
+    namePlaceholder: 'Robot 023',
     emailLabel: 'Email',
-    emailPlaceholder: 'voce@exemplo.com',
+    emailPlaceholder: 'robot@robots.com',
     messageLabel: 'Mensagem',
     messagePlaceholder: 'Diga-nos o que gostaria de imprimir...',
     send: 'Enviar mensagem',
+    sending: 'A enviar…',
+    error: 'Não foi possível enviar a mensagem. Tente novamente.',
     altText: 'ou encontre-nos em',
   },
 
@@ -171,6 +171,13 @@ export const pt = {
     edit: 'editar',
     delete: 'eliminar',
     confirmDelete: 'Eliminar «{title}»? Esta ação não pode ser anulada.',
+    tabPosts: '// publicacoes',
+    tabMessages: '// mensagens',
+    messagesTitle: '// mensagens_recebidas',
+    messagesEmpty: 'Ainda não há mensagens. As mensagens do formulário de contacto aparecem aqui.',
+    markRead: 'marcar como lida',
+    markUnread: 'marcar como não lida',
+    confirmDeleteMessage: 'Eliminar a mensagem de {name}? Esta ação não pode ser anulada.',
   },
 }
 

@@ -993,6 +993,104 @@ textarea {
   flex-shrink: 0;
 }
 
+/* ---------- admin tabs ---------- */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.admin-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.admin-tab:hover {
+  color: var(--text);
+  border-color: var(--accent-soft);
+}
+.admin-tab.active {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1a0e14;
+  background: var(--accent-2);
+  border-radius: 999px;
+  line-height: 1;
+}
+
+/* ---------- messages list ---------- */
+.messages-list li.message-item {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.6rem;
+  padding: 1rem;
+}
+.message-item.unread {
+  border-color: var(--accent-soft);
+  background: var(--bg-elev);
+}
+.message-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.message-from {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.message-from a {
+  font-size: 0.78rem;
+  text-decoration: none;
+}
+.message-from a:hover {
+  color: var(--accent);
+}
+.unread-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent-2);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--accent-2);
+}
+.message-date {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+.message-body {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.message-item.unread .message-body {
+  color: var(--text);
+}
+
 /* ---------- 404 ---------- */
 .notfound {
   min-height: 70vh;

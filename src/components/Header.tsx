@@ -6,11 +6,7 @@ export default function Header() {
   const t = useT()
   const [open, setOpen] = useState(false)
 
-  const links = [
-    { to: '/', label: t('nav.home'), end: true },
-    { to: '/#gallery', label: t('nav.gallery') },
-    { to: '/contact', label: t('nav.contact') },
-  ]
+  const links = [{ to: '/contact', label: t('nav.contact') }]
 
   return (
     <header className="site-header">
@@ -43,7 +39,6 @@ export default function Header() {
             <NavLink
               key={l.label}
               to={l.to}
-              end={l.end}
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={() => setOpen(false)}
             >
