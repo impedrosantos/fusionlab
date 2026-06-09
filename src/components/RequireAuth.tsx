@@ -11,7 +11,7 @@ export default function RequireAuth({ children }: { children: ReactNode }) {
     return <p className="empty mono">…</p>
   }
   if (!user) {
-    return <Navigate to="/bckfc3d" replace state={{ from: location.pathname }} />
+    return <Navigate to="/panda87" replace state={{ from: location.pathname }} />
   }
   return <>{children}</>
 }

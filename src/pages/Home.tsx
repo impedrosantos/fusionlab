@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Gallery from '../components/Gallery'
+import { InstagramIcon } from '../components/icons'
 import { useT } from '../i18n'
 
 export default function Home() {
@@ -12,7 +13,10 @@ export default function Home() {
         <div className="container hero-content">
           <span className="kicker mono">{t('home.kicker')}</span>
           <h1 className="hero-title">
-            {t('home.titleA')}
+            <span className="print-title">
+              <span className="print-text">{t('home.titleA')}</span>
+              <span className="print-nozzle" aria-hidden="true" />
+            </span>
           </h1>
           <p className="hero-sub">{t('home.sub')}</p>
           <div className="hero-actions">
@@ -25,7 +29,7 @@ export default function Home() {
               rel="noreferrer noopener"
               className="btn btn-ghost"
             >
-              {t('home.follow')}
+              <InstagramIcon /> {t('home.follow')}
             </a>
           </div>
 

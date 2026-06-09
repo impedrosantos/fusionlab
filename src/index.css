@@ -3,7 +3,7 @@
    ============================================================ */
 
 :root {
-  --bg: #0e0c15;
+  --bg: #08070d;
   --bg-elev: #16131f;
   --bg-elev-2: #1d1928;
   --border: #2a2438;
@@ -18,9 +18,9 @@
   --danger: #fca5a5;
   --radius: 12px;
   --maxw: 1140px;
-  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, 'Cascadia Code',
-    Menlo, Consolas, monospace;
-  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: Menlo, ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace;
+  --sans: Menlo, ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace;
+  --display: 'Orbitron', Menlo, ui-monospace, monospace;
 }
 
 * {
@@ -247,6 +247,7 @@ h3 {
 .hero-content {
   position: relative;
   z-index: 2;
+  text-align: center;
 }
 .hero-title {
   font-size: clamp(2.4rem, 6vw, 4.2rem);
@@ -257,20 +258,74 @@ h3 {
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   color: var(--text-dim);
   max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.9rem;
   margin: 2rem 0 2.5rem;
 }
 .hero-stats {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 2.5rem;
   margin: 0;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- hero print-on-load title ---------- */
+.print-title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.print-text {
+  display: inline-block;
+  background: linear-gradient(0deg, var(--accent-soft), var(--accent) 55%, var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: print-reveal 3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* the moving print head / nozzle line that climbs the text */
+.print-nozzle {
+  position: absolute;
+  left: -8px;
+  right: -8px;
+  top: 0;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 14px 2px var(--accent-glow);
+  pointer-events: none;
+  animation: print-head 3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes print-reveal {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes print-head {
+  from {
+    top: 100%;
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  to {
+    top: 0%;
+    opacity: 0;
+  }
 }
 .hero-stats dt {
   font-size: 1.25rem;
@@ -324,6 +379,18 @@ h3 {
   border-color: var(--accent-soft);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
+/* mobile: card is static, tapping does not open the viewer */
+.gallery-card-static {
+  cursor: default;
+}
+.gallery-card-static:hover {
+  transform: none;
+  border-color: var(--border-soft);
+  box-shadow: none;
+}
+.gallery-card-static:hover .gallery-img img {
+  transform: none;
+}
 .gallery-img {
   position: relative;
   aspect-ratio: 4 / 3;
@@ -358,10 +425,81 @@ h3 {
   font-size: 1.1rem;
   margin-bottom: 0.3rem;
 }
-.gallery-meta p {
+.gallery-meta p,
+.gallery-meta .rich-text {
   margin: 0;
   font-size: 0.9rem;
   color: var(--text-dim);
+}
+
+/* ---------- rich text (post descriptions) ---------- */
+.rich-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.rich-text strong,
+.rich-text b {
+  color: var(--text);
+  font-weight: 700;
+}
+.rich-text br {
+  content: '';
+}
+
+/* contenteditable rich text editor in the dashboard */
+.rich-editor-wrap {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-elev);
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.rich-editor-wrap:focus-within {
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.rich-toolbar {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-elev-2);
+}
+.rich-toolbar button {
+  min-width: 32px;
+  height: 28px;
+  padding: 0 0.5em;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.rich-toolbar button:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent);
+}
+.rich-editor {
+  min-height: 92px;
+  padding: 0.75em 0.9em;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.rich-editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-dim);
+}
+.rich-editor strong,
+.rich-editor b {
+  font-weight: 700;
 }
 
 /* lightbox */
@@ -402,7 +540,8 @@ h3 {
 .lightbox-meta h3 {
   margin: 0.6rem 0 0.4rem;
 }
-.lightbox-meta p {
+.lightbox-meta p,
+.lightbox-meta .rich-text {
   margin: 0;
   color: var(--text-dim);
 }

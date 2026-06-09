@@ -16,6 +16,7 @@ import {
 } from '../../lib/posts'
 import { uploadImage } from '../../lib/cloudinary'
 import { logout, useAuth } from '../../lib/auth'
+import { RichTextEditor } from '../../components/RichText'
 import { useT } from '../../i18n'
 
 type Draft = {
@@ -119,7 +120,7 @@ export default function Dashboard() {
 
   const signOut = async () => {
     await logout()
-    navigate('/bckfc3d', { replace: true })
+    navigate('/panda87', { replace: true })
   }
 
   const set = (key: keyof Draft) => (e: { target: { value: string } }) =>
@@ -226,10 +227,9 @@ export default function Dashboard() {
               </label>
               <label>
                 <span>{t('dashboard.descriptionLabel')}</span>
-                <textarea
-                  rows={3}
+                <RichTextEditor
                   value={draft.description}
-                  onChange={set('description')}
+                  onChange={(html) => setDraft((d) => ({ ...d, description: html }))}
                   placeholder={t('dashboard.descriptionPlaceholder')}
                 />
               </label>

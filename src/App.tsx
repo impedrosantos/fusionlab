@@ -9,7 +9,7 @@ import Login from './pages/admin/Login'
 import Dashboard from './pages/admin/Dashboard'
 import RequireAuth from './components/RequireAuth'
 
-const ADMIN_BASE = '/bckfc3d'
+const ADMIN_BASE = '/panda87'
 
 export default function App() {
   return (

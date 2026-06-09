@@ -50,15 +50,6 @@ export default function Header() {
               {l.label}
             </NavLink>
           ))}
-          <a
-            className="nav-cta"
-            href="https://instagram.com/fusionlab0"
-            target="_blank"
-            rel="noreferrer noopener"
-            onClick={() => setOpen(false)}
-          >
-            @fusionlab0
-          </a>
         </nav>
       </div>
     </header>

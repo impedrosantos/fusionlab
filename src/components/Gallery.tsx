@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react'
 import { subscribePosts, type Post } from '../lib/posts'
+import { RichTextView } from './RichText'
 import { useT } from '../i18n'
 
 export default function Gallery() {
   const t = useT()
   const [posts, setPosts] = useState<Post[]>([])
   const [active, setActive] = useState<Post | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => subscribePosts(setPosts), [])
+
+  // On mobile, tapping a card must not open the lightbox viewer.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 680px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   return (
     <section id="gallery" className="section">
@@ -22,18 +33,29 @@ export default function Gallery() {
           <p className="empty mono">{t('gallery.empty')}</p>
         ) : (
           <div className="gallery-grid">
-            {posts.map((p) => (
-              <button key={p.id} className="gallery-card" onClick={() => setActive(p)}>
-                <div className="gallery-img">
-                  <img src={p.imageUrl} alt={p.title} loading="lazy" />
-                  <span className="gallery-material mono">{p.material}</span>
+            {posts.map((p) => {
+              const inner = (
+                <>
+                  <div className="gallery-img">
+                    <img src={p.imageUrl} alt={p.title} loading="lazy" />
+                    <span className="gallery-material mono">{p.material}</span>
+                  </div>
+                  <div className="gallery-meta">
+                    <h3>{p.title}</h3>
+                    <RichTextView html={p.description} />
+                  </div>
+                </>
+              )
+              return isMobile ? (
+                <div key={p.id} className="gallery-card gallery-card-static">
+                  {inner}
                 </div>
-                <div className="gallery-meta">
-                  <h3>{p.title}</h3>
-                  <p>{p.description}</p>
-                </div>
-              </button>
-            ))}
+              ) : (
+                <button key={p.id} className="gallery-card" onClick={() => setActive(p)}>
+                  {inner}
+                </button>
+              )
+            })}
           </div>
         )}
       </div>
@@ -52,7 +74,7 @@ export default function Gallery() {
             <div className="lightbox-meta">
               <span className="gallery-material mono">{active.material}</span>
               <h3>{active.title}</h3>
-              <p>{active.description}</p>
+              <RichTextView html={active.description} />
             </div>
           </div>
         </div>

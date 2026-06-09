@@ -21,13 +21,13 @@ export const pt = {
 
   home: {
     kicker: '> a inicializar FusionLab...',
-    titleA: 'Loading...',
+    titleA: 'FUSIONLAB',
     titleAccent1: 'código',
     titleB: 'em',
     titleAccent2: 'objetos',
     sub: 'Estúdio de impressão 3D. Esta é a galeria do que imprimimos.',
     viewGallery: 'Ver a galeria',
-    follow: 'Seguir @fusionlab0',
+    follow: 'fusionlab0',
     stat1Value: '0,05mm',
     stat1Label: 'altura mínima de camada',
     stat2Value: 'FDM + Resina',

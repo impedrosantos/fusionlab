@@ -14,7 +14,7 @@ export default function Login() {
 
   // Already signed in? Go straight to the dashboard.
   if (!loading && user) {
-    return <Navigate to="/bckfc3d/dashboard" replace />
+    return <Navigate to="/panda87/dashboard" replace />
   }
 
   const onSubmit = async (e: FormEvent) => {
@@ -23,7 +23,7 @@ export default function Login() {
     setBusy(true)
     try {
       await login(email, password)
-      navigate('/bckfc3d/dashboard', { replace: true })
+      navigate('/panda87/dashboard', { replace: true })
     } catch {
       setError(t('login.error'))
     } finally {

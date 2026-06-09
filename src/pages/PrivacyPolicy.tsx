@@ -26,11 +26,7 @@ export default function PrivacyPolicy() {
         <h2>{t('privacy.contactTitle')}</h2>
         <p>
           {t('privacy.contactTextA')}{' '}
-          <a href="mailto:hello@fusionlab.studio">hello@fusionlab.studio</a> {t('privacy.contactTextB')}{' '}
-          <a href="https://instagram.com/fusionlab0" target="_blank" rel="noreferrer noopener">
-            @fusionlab0
-          </a>
-          .
+          <a href="mailto:hello@fusionlab.studio">hello@fusionlab.studio</a>.
         </p>
       </div>
     </article>

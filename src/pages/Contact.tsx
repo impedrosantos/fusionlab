@@ -72,13 +72,6 @@ export default function Contact() {
             </button>
           </form>
         )}
-
-        <p className="dim mono contact-alt">
-          {t('contact.altText')}{' '}
-          <a href="https://instagram.com/fusionlab0" target="_blank" rel="noreferrer noopener">
-            @fusionlab0
-          </a>
-        </p>
       </div>
     </article>
   )
