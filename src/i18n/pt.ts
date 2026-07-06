@@ -13,13 +13,13 @@ export const pt = {
     legal: 'Legal',
     privacy: 'Política de Privacidade',
     cookies: 'Cookies',
-    copyright: '© {year} FusionLab — todos os direitos reservados.',
+    copyright: '© {year} Esteva 3D — todos os direitos reservados.',
     builtWith: '// feito com filamento e código',
   },
 
   home: {
-    kicker: '> a inicializar FusionLab...',
-    titleA: 'FUSIONLAB',
+    kicker: '> a inicializar Esteva 3D...',
+    titleA: 'ESTEVA 3D',
     titleAccent1: 'código',
     titleB: 'em',
     titleAccent2: 'objetos',
@@ -38,7 +38,7 @@ export const pt = {
       'Um pequeno estúdio onde a engenharia encontra o artesanato. Modelamos, fatiamos e imprimimos — e partilhamos aqui os resultados.',
     aboutP2: 'Quer algo impresso? Fale connosco.',
     aboutCta: 'Entrar em contacto',
-    terminal: `$ fusionlab --estado
+    terminal: `$ esteva3d --estado
 > fatiador ...... pronto
 > filamento ..... carregado
 > base .......... 60°C
@@ -59,7 +59,7 @@ export const pt = {
     title: 'Política de Privacidade',
     updated: 'Última atualização: {year}',
     intro:
-      'A FusionLab («nós») respeita a sua privacidade. Esta página explica o que recolhemos quando visita este site e como o utilizamos. Trata-se de um modelo para um site de portefólio estático e deve ser revisto por um profissional antes de ser usado em produção.',
+      'A Esteva 3D («nós») respeita a sua privacidade. Esta página explica o que recolhemos quando visita este site e como o utilizamos. Trata-se de um modelo para um site de portefólio estático e deve ser revisto por um profissional antes de ser usado em produção.',
     collectTitle: 'O que recolhemos',
     collectText:
       'Este é um site de demonstração estático. Não exigimos a criação de conta para navegar na galeria. Se nos contactar através do formulário, recebemos o nome, o email e a mensagem que decidir enviar.',
@@ -82,7 +82,7 @@ export const pt = {
     title: 'Política de Cookies',
     updated: 'Última atualização: {year}',
     intro:
-      'Esta página explica como a FusionLab utiliza cookies e tecnologias de armazenamento local semelhantes. Trata-se de um modelo que deve ser revisto antes de ser usado em produção.',
+      'Esta página explica como a Esteva 3D utiliza cookies e tecnologias de armazenamento local semelhantes. Trata-se de um modelo que deve ser revisto antes de ser usado em produção.',
     whatTitle: 'O que são cookies?',
     whatText:
       'Os cookies são pequenos ficheiros guardados no seu dispositivo. Tecnologias semelhantes, como o localStorage, permitem que um site se lembre de informações entre visitas.',
@@ -120,6 +120,35 @@ export const pt = {
     sending: 'A enviar…',
     error: 'Não foi possível enviar a mensagem. Tente novamente.',
     altText: 'ou encontre-nos em',
+  },
+
+  calc: {
+    kicker: '// calculadora_de_custo',
+    title: 'Calculadora de Preços',
+    intro: 'Estime o custo e o preço de venda de uma peça impressa em 3D.',
+    pieceTitle: 'Peça',
+    weightLabel: 'Peso da peça',
+    timeLabel: 'Tempo de impressão',
+    filPriceLabel: 'Custo filamento',
+    wasteLabel: 'Desperdício / falhas',
+    machineTitle: 'Máquina & energia',
+    wattLabel: 'Potência impressora',
+    kwhLabel: 'Preço eletricidade',
+    machCostLabel: 'Custo da impressora',
+    machLifeLabel: 'Vida útil',
+    laborTitle: 'Mão de obra & margem',
+    labTimeLabel: 'Tempo de trabalho',
+    labRateLabel: 'Custo hora',
+    marginLabel: 'Margem de lucro',
+    resultLabel: 'Preço de venda sugerido',
+    resultSub: 'custo {total} € + margem de {margin}%',
+    filamento: 'Filamento',
+    eletricidade: 'Eletricidade',
+    maquina: 'Depreciação da máquina',
+    maquinaShort: 'Máquina',
+    mao: 'Mão de obra',
+    totalCost: 'Custo total',
+    note: 'custo/peça = filamento + eletricidade + depreciação + mão-de-obra · preço = custo × (1 + margem)',
   },
 
   notFound: {

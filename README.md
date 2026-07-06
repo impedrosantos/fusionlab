@@ -1,4 +1,4 @@
-# FusionLab
+# Esteva 3D
 
 A responsive, dark-mode marketing site + lightweight backoffice for a 3D printing
 studio. Built with **Vite + React + TypeScript + React Router**. Slight dev/code
@@ -11,7 +11,7 @@ UI text is fully internationalised; current locale is **Portuguese (pt-PT)**.
   legal pages (Privacy Policy, Cookies).
 - **Gallery** — renders posts created in the backoffice. Click any print for a
   lightbox with details.
-- **Backoffice** (`/bckfc3d`) — login screen → dashboard with full CRUD over
+- **Backoffice** (`/panda87`) — login screen → dashboard with full CRUD over
   gallery posts.
 - Responsive layout with a mobile nav, dark-only theme, `prefers-reduced-motion`
   aware animations.
@@ -44,7 +44,7 @@ Firestore** (gallery posts). One-time setup:
 
 There is no public sign-up. Add users in **Authentication → Users → Add user**
 (email + password). Any user you create can sign in to the backoffice; delete the
-user there to revoke access. The login screen lives at **`/bckfc3d`**.
+user there to revoke access. The login screen lives at **`/panda87`**.
 
 ## Deployment
 

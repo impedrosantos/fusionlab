@@ -11,7 +11,7 @@ export default function Footer() {
           <span className="brand">
             <img className="brand-logo" src="/logo.png" alt="" aria-hidden="true" />
             <span className="brand-name">
-              Fusion<span className="accent">Lab</span>
+              Esteva <span className="accent">3D</span>
             </span>
           </span>
           <p className="footer-tagline">{t("footer.tagline")}</p>

@@ -39,7 +39,7 @@ export default function Login() {
             ◢◣
           </span>
           <h1 className="mono">
-            Fusion<span className="accent">Lab</span> :: {t('login.title')}
+            Esteva <span className="accent">3D</span> :: {t('login.title')}
           </h1>
           <p className="mono dim">{t('login.subtitle')}</p>
         </div>
@@ -52,7 +52,7 @@ export default function Login() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@fusionlab.pt"
+              placeholder="admin@esteva3d.pt"
               autoFocus
             />
           </label>

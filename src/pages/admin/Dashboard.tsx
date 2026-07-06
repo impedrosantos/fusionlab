@@ -153,7 +153,7 @@ export default function Dashboard() {
       <header className="admin-topbar">
         <div className="container admin-topbar-inner">
           <span className="brand-name mono">
-            Fusion<span className="accent">Lab</span> :: {t('dashboard.title')}
+            Esteva <span className="accent">3D</span> :: {t('dashboard.title')}
           </span>
           <div className="admin-user mono">
             <span className="dim">

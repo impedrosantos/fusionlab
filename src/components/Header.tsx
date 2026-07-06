@@ -14,7 +14,7 @@ export default function Header() {
         <Link to="/" className="brand" onClick={() => setOpen(false)}>
           <img className="brand-logo" src="/logo.png" alt="" aria-hidden="true" />
           <span className="brand-name">
-            Fusion<span className="accent">Lab</span>
+            Esteva <span className="accent">3D</span>
           </span>
           <span className="brand-cursor" aria-hidden="true">
             _

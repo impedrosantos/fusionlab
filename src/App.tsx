@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Cookies from './pages/Cookies'
 import Contact from './pages/Contact'
+import Calculadora from './pages/Calculadora'
 import NotFound from './pages/NotFound'
 import Login from './pages/admin/Login'
 import Dashboard from './pages/admin/Dashboard'
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/calculadora-preco" element={<Calculadora />} />
       </Route>
 
       {/* Backoffice */}
